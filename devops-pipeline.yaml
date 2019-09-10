@@ -46,7 +46,7 @@ stages:
           - script: |
               echo 'Hello pack my old friend~~!'
   
-    - stage: 'deploy'
+  - stage: 'deploy'
     condition: succeeded()
     dependsOn:
       - test
