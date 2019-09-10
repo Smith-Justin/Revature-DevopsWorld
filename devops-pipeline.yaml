@@ -14,23 +14,12 @@ stages:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-              echo 'Hello darkness my old friend~~!'
-  
-  - stage: 'deploy'
-    condition: succeeded()
-    displayName: 'deploy-mvc'
-    jobs:
-      - job:
-        condition: succeeded()
-        displayName: 'deploy process'
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-          - script: |
-              echo 'Hello deploy my old friend~~!'
+              dotnet build
   
   - stage: 'test'
     condition: succeeded()
+    dependsOn:
+      - build
     displayName: 'test-mvc'
     jobs:
       - job:
@@ -40,10 +29,12 @@ stages:
           vmImage: 'ubuntu-16.04'
         steps:
           - script: |
-              echo 'Hello test my old friend~~!'
+              dotnet test
 
   - stage: 'pack'
     condition: succeeded()
+    dependsOn:
+      - test
     displayName: 'pack-mvc'
     jobs:
       - job:
@@ -54,6 +45,21 @@ stages:
         steps:
           - script: |
               echo 'Hello pack my old friend~~!'
+  
+    - stage: 'deploy'
+    condition: succeeded()
+    dependsOn:
+      - test
+    displayName: 'deploy-mvc'
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'deploy process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - script: |
+              echo 'Hello deploy my old friend~~!'
 
 trigger:
   branches:
