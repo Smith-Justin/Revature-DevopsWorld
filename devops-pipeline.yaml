@@ -13,9 +13,8 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
-          - step:
-            - script: |
-                echo 'Hello darkness my old friend~~!'
+          - script: |
+              echo 'Hello darkness my old friend~~!'
   
   - stage: 'deploy'
     condition: succeeded()
@@ -27,9 +26,8 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
-          - step:
-            - script: |
-                echo 'Hello deploy my old friend~~!'
+          - script: |
+              echo 'Hello deploy my old friend~~!'
   
   - stage: 'test'
     condition: succeeded()
@@ -41,9 +39,8 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
-          - step:
-            - script: |
-                echo 'Hello test my old friend~~!'
+          - script: |
+              echo 'Hello test my old friend~~!'
 
   - stage: 'pack'
     condition: succeeded()
@@ -55,9 +52,8 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
-          - step:
-            - script: |
-                echo 'Hello pack my old friend~~!'
+          - script: |
+              echo 'Hello pack my old friend~~!'
 
   - stage: 'test'
     condition: succeeded()
@@ -67,9 +63,9 @@ stages:
   - stage: 'packing'
   - stage: 'deploy'
 
-triggers:
-  - branches:
-      include:
-        - master
+trigger:
+  branches:
+    include:
+      - master
 
 variables:
