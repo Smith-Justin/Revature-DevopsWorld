@@ -1,0 +1,75 @@
+#devopsdemo - pipeline
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+stages:
+  - stage: 'build'
+    condition: succeeded()
+    displayName: 'build-mvc'
+    jobs:
+      - job:
+        condition: and(succeeded(), eq(['BranchName'], 'fred'))
+        displayName: 'build process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - step:
+            - script: |
+                echo 'Hello darkness my old friend~~!'
+  
+  - stage: 'deploy'
+    condition: succeeded()
+    displayName: 'deploy-mvc'
+    jobs:
+      - job:
+        condition: and(succeeded(), eq(['BranchName'], 'fred'))
+        displayName: 'deploy process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - step:
+            - script: |
+                echo 'Hello deploy my old friend~~!'
+  
+  - stage: 'test'
+    condition: succeeded()
+    displayName: 'test-mvc'
+    jobs:
+      - job:
+        condition: and(succeeded(), eq(['BranchName'], 'fred'))
+        displayName: 'test process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - step:
+            - script: |
+                echo 'Hello test my old friend~~!'
+
+  - stage: 'pack'
+    condition: succeeded()
+    displayName: 'pack-mvc'
+    jobs:
+      - job:
+        condition: and(succeeded(), eq(['BranchName'], 'fred'))
+        displayName: 'pack process'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - step:
+            - script: |
+                echo 'Hello pack my old friend~~!'
+
+  - stage: 'test'
+    condition: succeeded()
+    dependsOn:
+      - build
+    displayName: 'test-mvc'
+  - stage: 'packing'
+  - stage: 'deploy'
+
+triggers:
+  - branches:
+      include:
+        - master
+
+variables:
