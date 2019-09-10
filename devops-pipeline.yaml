@@ -55,14 +55,6 @@ stages:
           - script: |
               echo 'Hello pack my old friend~~!'
 
-  - stage: 'test'
-    condition: succeeded()
-    dependsOn:
-      - build
-    displayName: 'test-mvc'
-  - stage: 'packing'
-  - stage: 'deploy'
-
 trigger:
   branches:
     include:
