@@ -34,7 +34,7 @@ stages:
         steps:
           - script: |
               dotnet tool install --global dotnet-sonarscanner
-              dotnet sonarscanner begin /k:"devopsdemo2020" /o:"Smith-Justin" /d:sonar.login="a85a96cc03261b25d7ab46e078616bbf8cf7fc41"
+              dotnet sonarscanner begin /k:"devopsdemo2020" /o:"smith-justin" /d:sonar.login="a85a96cc03261b25d7ab46e078616bbf8cf7fc41" /d:sonar.host.url="https://sonarcloud.io"
               dotnet build
               dotnet test -p:CollectCoverage=true
               dotnet sonarscanner end /d:sonar.login="a85a96cc03261b25d7ab46e078616bbf8cf7fc41 "
