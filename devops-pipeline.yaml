@@ -72,7 +72,7 @@ stages:
           - script: |
               docker image build --file Dockerfile --tag devopsdemo .
               docker image tag devopsdemo justinsmith95/devopsdemo
-              docker push
+              docker push justinsmith95/devopsdemo
           - task: Docker@2
             inputs:
               command: 'login'
